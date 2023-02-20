@@ -1,5 +1,9 @@
+<div>{{announceRender()}}</div>
 <h1>This is the parent component</h1>
 
 <button (click)="onHobbyChangeFromParent()">Update Tony's hobby from parent component</button>
+<button (click)="toggleCd()">Toggle Change Detection</button>
 
 <app-child *ngFor="let user of users" [user]="user"></app-child>
+
+<app-child2 [notifier$]="notifier$" [count]="count"></app-child2>

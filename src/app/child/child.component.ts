@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-child',
@@ -9,10 +9,24 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 export class ChildComponent implements OnInit {
   @Input() user!: { firstName: string, lastName: string, age: number, hobby: string };
   countObj: {value: number} = {value: 0};
+  markForCheckExample: string = '';
 
-  constructor() { }
+  constructor(
+    private cd: ChangeDetectorRef
+  ) {
+  }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.markForCheckExample = 'Mark for check example should display after 2 seconds';
+      // Must use when a view uses the onPush strategy in order to explicitly mark the view as changed 
+      // so that it can be checked again.
+      this.cd.markForCheck();
+    }, 2000);
+  }
+
+  announceRender(): void {
+    console.log('Child component rendered');
   }
 
   // This will work and Angular will update the view regardless of the Change Detection Strategy. This 
