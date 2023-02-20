@@ -35,7 +35,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     setInterval(() => {
       this.count += 1;
-      // this.countNotifier$.next(this.count);
     }, 100);
   }
 
